@@ -1,0 +1,52 @@
+<!-- all pages in website -->
+
+<!-- HEAD CODE -->
+<script>
+
+	document.addEventListener('DOMContentLoaded', () => {
+		/** init tracking scripts after 3500 seconds - this could be adjusted **/
+		setTimeout(initTrackingScripts, 3500);
+	});
+
+	/**
+		These listeners initiate downloading of the scripts if user
+		moves mouse, touches keyboard or scrolls to not miss visits
+	**/
+	document.addEventListener('scroll', initTrackingOnEvent);
+	document.addEventListener('mousemove', initTrackingOnEvent);
+	document.addEventListener('touchstart', initTrackingOnEvent);
+
+	/** init all tracking scripts when any of the prior events happen **/
+	function initTrackingOnEvent (event) {
+		initTrackingScripts();
+		event.currentTarget.removeEventListener(event.type, initTrackingOnEvent); // remove the event listener that got triggered
+	}
+
+	/** Initiates all tracking scripts **/
+	function initTrackingScripts () {
+		if (window.trackingDidInit) {
+			return false;
+		}
+	  // flag to ensure script does not get added to DOM more than once.
+		window.trackingDidInit = true;
+
+    initGTM();
+	}
+
+
+	/** Google tag manager tracking script **/
+
+	function initGTM() {
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K9ZQZXH');
+	}
+
+</script>
+
+
+
+
+<!-- BEFORE </BODY> CODE -->
