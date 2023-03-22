@@ -27,7 +27,7 @@ $("head").append(`
     position: absolute;
     width: 30px;
     top: 10px;
-    right: 10px;
+    right: 25px;
   }
 </style>
 `);
