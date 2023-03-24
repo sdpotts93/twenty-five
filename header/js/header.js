@@ -25,6 +25,8 @@ $("head").append(`
 
   #close-overlay {
     fill: white;
+    stroke: black;
+    stroke-width: 5px;
     position: absolute;
     width: 30px;
     top: 10px;
