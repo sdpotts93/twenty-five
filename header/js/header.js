@@ -20,10 +20,11 @@ $("head").append(`
     transform: translate(-50%, -50%);
     text-align: center;
     width: 100%;
+    height: 100%;
   }
 
   #close-overlay {
-    fill: white;
+    fill: #6739d7;
     position: absolute;
     width: 30px;
     top: 10px;
