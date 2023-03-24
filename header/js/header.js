@@ -24,7 +24,7 @@ $("head").append(`
   }
 
   #close-overlay {
-    fill: #6739d7;
+    fill: white;
     position: absolute;
     width: 30px;
     top: 10px;
