@@ -46,21 +46,21 @@ if (urlParams?.newsletterFail) {
 
 const newsletterOverlay = document.getElementById("newsletter-overlay");
 
-const newsLetterStorageClose = localStorage.get("newsletterClose");
+const newsLetterStorageClose = window.localStorage.getItem("newsletterClose");
 
-const tempDate = new Date();
+let tempDate = new Date();
 const today = new Date();
 
 if (newsLetterStorageClose) {
   tempDate = new Date(newsLetterStorageClose);
-  tempDate.setDate(tempDate.getDate() + 60);
+  tempDate = new Date(tempDate.setDate(tempDate.getDate() + 60));
 }
 
 if (
   !newsLetterStorageClose ||
   (
     newsLetterStorageClose &&
-    tempDate.getTime() > today.getTime()
+    today.getTime() > tempDate.getTime()
   )
 ) {
   newsletterOverlay.style.opacity = "0";
@@ -77,7 +77,7 @@ const newsletterClose = document.getElementById("close-button");
 newsletterClose.addEventListener("click", () => {
   newsletterOverlay.style.opacity = "0";
 
-  localStorage.set("newsletterClose", new Date());
+  localStorage.setItem("newsletterClose", new Date());
 
   setTimeout(() => {
     newsletterOverlay.style.display = "none";
