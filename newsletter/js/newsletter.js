@@ -44,7 +44,45 @@ if (urlParams?.newsletterFail) {
   });
 }
 
+const newsletterOverlay = document.getElementById("newsletter-overlay");
+
+const newsLetterStorageClose = localStorage.get("newsletterClose");
+
+const tempDate = new Date();
+const today = new Date();
+
+if (newsLetterStorageClose) {
+  tempDate = new Date(newsLetterStorageClose);
+  tempDate.setDate(tempDate.getDate() + 60);
+}
+
+if (
+  !newsLetterStorageClose ||
+  (
+    newsLetterStorageClose &&
+    tempDate.getTime() > today.getTime()
+  )
+) {
+  newsletterOverlay.style.opacity = "0";
+  newsletterOverlay.style.display = "flex";
+  setTimeout(() => {
+    newsletterOverlay.style.opacity = "1";
+  }, 10);
+}
+
+const newsletterClose = document.getElementById("close-button");
+
 // ----------------- LISTENERS ----------------------
+
+newsletterClose.addEventListener("click", () => {
+  newsletterOverlay.style.opacity = "0";
+
+  localStorage.set("newsletterClose", new Date());
+
+  setTimeout(() => {
+    newsletterOverlay.style.display = "none";
+  }, 500);
+});
 
 // Change all text fields styles on focus and on blur
 
