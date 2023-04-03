@@ -49,7 +49,66 @@ const submitButton = document.getElementById("consultation");
 const closeBtn = document.getElementById('close-overlay');
 const overlay = document.getElementById('overlay');
 
+// Get url params
+const urlSearchParams = new URLSearchParams(window.location.search);
+const urlParams = Object.fromEntries(urlSearchParams.entries());
+
+if (urlParams?.newsletterFail) {
+  const emailForm = document.querySelector("#email-form");
+  const newsletterForm = document.querySelector("#wf-form-newsletter-subscription");
+
+  const emailFormDone = emailForm.parentElement.querySelector(".w-form-fail");
+
+  const newsletterFormDone = newsletterForm.parentElement.querySelector(".w-form-fail");
+
+  [emailFormDone, newsletterFormDone].forEach(item => {
+    item.style.display = "block";
+  });
+  const newsletterForms = document.querySelectorAll("#email-form, #wf-form-newsletter-subscription");
+
+  newsletterForms.forEach(item => {
+    item.style.display = "none";
+  });
+}
+
+const newsletterOverlay = document.getElementById("newsletter-overlay");
+
+const newsLetterStorageClose = window.localStorage.getItem("newsletterClose");
+
+let tempDate = new Date();
+const today = new Date();
+
+if (newsLetterStorageClose) {
+  tempDate = new Date(newsLetterStorageClose);
+  tempDate = new Date(tempDate.setDate(tempDate.getDate() + 60));
+}
+
+if (
+  !newsLetterStorageClose ||
+  (
+    newsLetterStorageClose &&
+    today.getTime() > tempDate.getTime()
+  )
+) {
+  newsletterOverlay.style.opacity = "0";
+  newsletterOverlay.style.display = "flex";
+  setTimeout(() => {
+    newsletterOverlay.style.opacity = "1";
+  }, 10);
+}
+
+const newsletterClose = document.getElementById("close-button");
 // ----------------- LISTENERS ----------------------
+
+newsletterClose.addEventListener("click", () => {
+  newsletterOverlay.style.opacity = "0";
+
+  localStorage.setItem("newsletterClose", new Date());
+
+  setTimeout(() => {
+    newsletterOverlay.style.display = "none";
+  }, 500);
+});
 
 submitButton.addEventListener("click", (e) => {
   e.preventDefault();
