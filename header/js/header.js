@@ -116,6 +116,12 @@ submitButton.addEventListener("click", (e) => {
 
   overlay.style.display = 'block';
 
+  let tempSuccessDate = new Date();
+
+  tempSuccessDate = new Date(tempSuccessDate.setDate(tempSuccessDate.getDate() + 25000));
+
+  localStorage.setItem("newsletterClose", tempSuccessDate);
+
   return false;
 });
 
