@@ -1,16 +1,10 @@
 // ----------------- VARIABLES ----------------------
 
-const calendlyWidgetButton = document.querySelector(".button.cta-white.w-button");
+const beaconContainer = document.querySelector("#beacon-container");
 
 // ----------------- LISTENERS ----------------------
 
-calendlyWidgetButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-
-  overlay.style.display = 'block';
-
-  return false;
-});
-
+document.querySelector(".footer-help").addEventListener("click", () => {
+  beaconContainer.click();
+})
 // ----------------- FUNCTIONS ----------------------
